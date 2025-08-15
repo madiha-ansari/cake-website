@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Crust Bakery</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #f5e6d0;
+            --secondary-color: #a67c52;
+            --accent-color: #e6a756;
+            --text-color: #3a2e1f;
+            --light-text: #fff9f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0f75518e-908a-4c87-81ec-d4d8388ee555.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Products Section */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .product-info p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price span {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .add-to-cart {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* About Section */
+        .about {
+            background-color: white;
+            padding: 80px 0;
+            margin-top: 80px;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text-color);
+            color: var(--light-text);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: var(--light-text);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .lightbox-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .lightbox-details {
+            padding: 30px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Golden Crust</a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Artisanal Baked Goods Made With Love</h1>
+            <p>Freshly baked pastries, breads, and desserts made from locally sourced ingredients. Experience the taste of true craftsmanship in every bite.</p>
+            <a href="#products" class="btn">Browse Our Selection</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <h2 class="section-title">Our Delicious Offerings</h2>
+        <div class="products container">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ce8200f3-3baf-4194-8744-49f39b1084a9.png" alt="Freshly baked sourdough bread on wooden cutting board with flour dusting" />
+                </div>
+                <div class="product-info">
+                    <h3>Artisan Sourdough</h3>
+                    <p>Our traditional 48-hour fermented sourdough with a perfect crust and airy interior.</p>
+                    <div class="price">
+                        <span>$8.99</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/88dd8593-4af7-4e1c-a8c4-4fbe8d8bfa92.png" alt="Assortment of colorful macarons on marble surface with floral decorations" />
+                </div>
+                <div class="product-info">
+                    <h3>French Macarons</h3>
+                    <p>Delicate almond meringue cookies with a variety of flavored fillings.</p>
+                    <div class="price">
+                        <span>$12.99</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/22467142-5cce-40ca-8ce8-f94d14400699.png" alt="Slice of classic croissant with visible flaky layers on rustic wood table" />
+                </div>
+                <div class="product-info">
+                    <h3>Butter Croissant</h3>
+                    <p>Authentic French-style croissant with 27 layers of premium butter.</p>
+                    <div class="price">
+                        <span>$4.99</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="products container">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a1c6a8e1-556a-4a53-8bbf-a3dd3e0b7464.png" alt="Chocolate chip cookies stacked with melted chocolate visible on parchment paper" />
+                </div>
+                <div class="product-info">
+                    <h3>Chocolate Chip Cookies</h3>
+                    <p>Classic cookies with generous chunks of dark chocolate and sea salt.</p>
+                    <div class="price">
+                        <span>$3.50</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/58a8bf4a-0ab2-4be0-82fb-e060776cbe8a.png" alt="Three-tiered wedding cake decorated with fresh flowers and delicate piping" />
+                </div>
+                <div class="product-info">
+                    <h3>Specialty Cakes</h3>
+                    <p>Custom-designed cakes for all occasions, made to your specifications.</p>
+                    <div class="price">
+                        <span>From $45.99</span>
+                        <button class="add-to-cart">Inquire</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8eadb955-921d-4dbd-b965-ff0072a74b69.png" alt="Freshly baked cinnamon rolls with icing drizzle in cast iron skillet" />
+                </div>
+                <div class="product-info">
+                    <h3>Cinnamon Rolls</h3>
+                    <p>Soft, fluffy rolls with cinnamon-sugar filling and cream cheese frosting.</p>
+                    <div class="price">
+                        <span>$5.99</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">Our Story</h2>
+                    <p>Founded in 2010, Golden Crust Bakery began as a small family-owned shop with a passion for traditional baking methods. What started as a modest storefront with three employees has grown into a beloved local institution, all while maintaining our commitment to quality and craftsmanship.</p>
+                    <p>We still use the same techniques and recipes passed down through generations, combining them with the finest locally sourced ingredients. Every item in our bakery is made from scratch daily - because we believe you can taste the difference that careful attention and time creates.</p>
+                    <p>Meet our team of talented bakers who pour their heart into every creation, ensuring that each visit to Golden Crust is a memorable experience.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a245180d-e275-4df6-a973-623f3d46401a.png" alt="Baker kneading dough in a traditional kitchen with wooden counter and natural light" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-form container">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Golden Crust</h3>
+                    <p>Bringing artisanal baking traditions to your neighborhood since 2010. Quality ingredients, time-honored techniques, and passion in every bite.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p>123 Baker Street<br>
+                    Your City, ST 12345<br>
+                    Phone: (555) 123-4567<br>
+                    Email: info@goldencrust.com</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 Golden Crust Bakery. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <div class="lightbox-image-container">
+                <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            </div>
+            <div class="lightbox-details">
+                <h3 id="lightboxTitle"></h3>
+                <p id="lightboxDescription"></p>
+                <div class="price">
+                    <span id="lightboxPrice"></span>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Product data
+        const products = [
+            {
+                id: 1,
+                name: "Artisan Sourdough",
+                description: "Our traditional 48-hour fermented sourdough with a perfect crust and airy interior.",
+                price: "$8.99",
+                image: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/98a9fa42-8a95-4d6a-97c3-e35c9aa2e818.png"
+            },
+            {
+                id: 2,
+                name: "French Macarons",
+                description: "Delicate almond meringue cookies with a variety of flavored fillings.",
+                price: "$12.99",
+                image: "https://placehold.co/800x600"
+            },
+            {
+                id: 3,
+                name: "Butter Croissant",
+                description: "Authentic French-style croissant with 27 layers of premium butter.",
+                price: "$4.99",
+                image: "https://placehold.co/800x600"
+            },
+            {
+                id: 4,
+                name: "Chocolate Chip Cookies",
+                description: "Classic cookies with generous chunks of dark chocolate and sea salt.",
+                price: "$3.50",
+                image: "https://placehold.co/800x600"
+            },
+            {
+                id: 5,
+                name: "Specialty Cakes",
+                description: "Custom-designed cakes for all occasions, made to your specifications.",
+                price: "From $45.99",
+                image: "https://placehold.co/800x600"
+            },
+            {
+                id: 6,
+                name: "Cinnamon Rolls",
+                description: "Soft, fluffy rolls with cinnamon-sugar filling and cream cheese frosting.",
+                price: "$5.99",
+                image: "https://placehold.co/800x600"
+            }
+        ];
+
+        // DOM Elements
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxDescription = document.getElementById('lightboxDescription');
+        const lightboxPrice = document.getElementById('lightboxPrice');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const contactForm = document.getElementById('contactForm');
+        
+        // Product click handlers
+        document.querySelectorAll('.product-image').forEach((image, index) => {
+            image.addEventListener('click', () => {
+                const product = products[index];
+                lightboxImage.src = product.image;
+                lightboxImage.alt = product.name;
+                lightboxTitle.textContent = product.name;
+                lightboxDescription.textContent = product.description;
+                lightboxPrice.textContent = product.price;
+                lightbox.classList.add('active');
+            });
+        });
+        
+        // Close lightbox
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+        
+        // Close lightbox when clicking outside content
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+        
+        // Add to cart functionality
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.textContent = 'Added to Cart!';
+                setTimeout(() => {
+                    button.textContent = button.dataset.original || 'Add to Cart';
+                }, 2000);
+            });
+        });
+        
+        // Contact form submission
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+        
+        // Mobile menu toggle (would be fully implemented with more time)
+        const mobileMenuToggle = document.createElement('div');
+        mobileMenuToggle.className = 'mobile-menu-toggle';
+        mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        document.querySelector('nav').appendChild(mobileMenuToggle);
+    </script>
+</body>
+</html>
+
